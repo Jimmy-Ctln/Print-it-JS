@@ -24,22 +24,22 @@ const arrowRight 	= document.querySelector(".arrow_right");
 // const slideImage	= slides[0];
 
 // Permet de récuperer la classe 
-const bannerImage 		= document.querySelector('.banner-img');
-const bannerParagraph 	= document.querySelector('p')
+const bannerImage 			= document.querySelector('.banner-img');
+var numberIndex 			= 0;
+bannerImage.src 			= "./assets/images/slideshow/" + slides[numberIndex].image;
 
-var numberIndex = 0;
-bannerImage.src = "./assets/images/slideshow/" + slides[numberIndex].image;
-
-const slideTagline =  slides[numberIndex].tagLine
-console.log(slideTagline)
+const bannerParagraph 		= document.querySelector('#banner p')
+bannerParagraph.innerHTML 	= slides[numberIndex].tagLine;
 
 
 function arrowleft() {
+	
 	arrowLeft.addEventListener('click', () => {
 
 		console.log('click arrow left');
 		numberIndex--;
 		bannerImage.src = "./assets/images/slideshow/" + slides[numberIndex].image;
+		bannerParagraph.innerHTML 	= slides[numberIndex].tagLine;
 	})
 }
 arrowleft();
@@ -52,6 +52,7 @@ function arrowright() {
 			console.log('click arrow right');
 			numberIndex++;
 			bannerImage.src = "./assets/images/slideshow/" + slides[numberIndex].image;
+			bannerParagraph.innerHTML 	= slides[numberIndex].tagLine;
 				
 		})
 
