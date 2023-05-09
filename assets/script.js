@@ -17,15 +17,44 @@ const slides = [
 	}
 ]
 
-const arrowLeft = document.querySelector(".arrow_left");
-const arrowRight = document.querySelector(".arrow_right");
+const arrowLeft 	= document.querySelector(".arrow_left");
+const arrowRight 	= document.querySelector(".arrow_right");
 
-arrowLeft.addEventListener('click', () => {
+// Permet d'acceder au tableau
+// const slideImage	= slides[0];
 
-	console.log('click arrow left');
-})
+// Permet de récuperer la classe 
+const bannerImage 		= document.querySelector('.banner-img');
+const bannerParagraph 	= document.querySelector('p')
 
-arrowRight.addEventListener('click', () => {
+var numberIndex = 0;
+bannerImage.src = "./assets/images/slideshow/" + slides[numberIndex].image;
 
-	console.log('click arrow right');
-})
+const slideTagline =  slides[numberIndex].tagLine
+console.log(slideTagline)
+
+
+function arrowleft() {
+	arrowLeft.addEventListener('click', () => {
+
+		console.log('click arrow left');
+		numberIndex--;
+		bannerImage.src = "./assets/images/slideshow/" + slides[numberIndex].image;
+	})
+}
+arrowleft();
+
+
+function arrowright() {
+		
+		arrowRight.addEventListener('click', () => {
+			
+			console.log('click arrow right');
+			numberIndex++;
+			bannerImage.src = "./assets/images/slideshow/" + slides[numberIndex].image;
+				
+		})
+
+}
+arrowright();
+
