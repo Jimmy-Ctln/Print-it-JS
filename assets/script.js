@@ -1,80 +1,107 @@
 const slides = [
-	{
-		"image":"slide1.jpg",
-		"tagLine":"Impressions tous formats <span>en boutique et en ligne</span>",
-		"dot": true,
-		"dot_selected" : true
-	},
-	{
-		"image":"slide2.jpg",
-		"tagLine":"Tirages haute définition grand format <span>pour vos bureaux et events</span>",
-		"dot": true,
-		"dot_selected" : false
-	},
-	{
-		"image":"slide3.jpg",
-		"tagLine":"Grand choix de couleurs <span>de CMJN aux pantones</span>",
-		"dot": true,
-		"dot_selected" : false
-	},
-	{
-		"image":"slide4.png",
-		"tagLine":"Autocollants <span>avec découpe laser sur mesure</span>",
-		"dot": true,
-		"dot_selected" : false
-	}
-]
+  {
+    image: "slide1.jpg",
+    tagLine: "Impressions tous formats <span>en boutique et en ligne</span>",
+  },
+  {
+    image: "slide2.jpg",
+    tagLine:"Tirages haute définition grand format <span>pour vos bureaux et events</span>",
+  },
+  {
+    image: "slide3.jpg",
+    tagLine: "Grand choix de couleurs <span>de CMJN aux pantones</span>",
+  },
+  {
+    image: "slide4.png",
+    tagLine: "Autocollants <span>avec découpe laser sur mesure</span>",
+  },
+];
 
-const arrowLeft 	= document.querySelector(".arrow_left");
-const arrowRight 	= document.querySelector(".arrow_right");
+// Get the class back
+const arrowLeft = document.querySelector(".arrow_left");
+const arrowRight = document.querySelector(".arrow_right");
+const bannerImage = document.querySelector(".banner-img");
 
-// Permet d'acceder au tableau
+// dotNumber0.classList.add('dot_selected')
 
-// Permet de récuperer la classe 
-const bannerImage 			= document.querySelector('.banner-img');
-var numberIndex 			= 0;
-bannerImage.src 			= "./assets/images/slideshow/" + slides[numberIndex].image;
+// change the index
+let numberIndex = 0;
 
-const bannerParagraph 		= document.querySelector('#banner p')
-bannerParagraph.innerHTML 	= slides[numberIndex].tagLine;
-	
+// Get the class back
+bannerImage.src = "./assets/images/slideshow/" + slides[numberIndex].image;
 
+const bannerParagraph = document.querySelector("#banner p");
+bannerParagraph.innerHTML = slides[numberIndex].tagLine;
+
+// Creating dots
 for (let i = 0; i < 4; i++) {
-	
-	const dotElement				= document.createElement("div");
-	dotElement.classList.add("dot");
-	
-	const dots						= document.querySelector(".dots");
-	dots.appendChild(dotElement)
+  
+  const dotElement = document.createElement("div");
+  var uniqueId = 'dotNumber' + i;
+  dotElement.id = uniqueId;
+  dotElement.classList.add("dot");
+
+  //Attach parent dots
+  const dots = document.querySelector(".dots");
+  dots.appendChild(dotElement);
 }
 
 
+// set eventlistener
+arrowLeft.addEventListener("click", slideLeft);
+arrowRight.addEventListener("click", slideRight);
+
+// Adding the class for "dot_selected" the first dot
+const dotNumber = document.querySelector('#dotNumber' + numberIndex);
+dotNumber.classList.add('dot_selected');
 
 
-function arrowleft() {
-	
-	arrowLeft.addEventListener('click', () => {
-
-		console.log('click arrow left');
-		numberIndex--;
-		bannerImage.src = "./assets/images/slideshow/" + slides[numberIndex].image;
-		bannerParagraph.innerHTML 	= slides[numberIndex].tagLine;
-	})
+function addDotSelectedRight() {
+	let dotNumber = document.querySelector('#dotNumber' + numberIndex);
+	dotNumber.classList.add('dot_selected');
+	console.log("add est au numero" + dotNumber.id)
 }
-arrowleft();
+
+function addDotSelectedLeft() {
+	let dotNumber = document.querySelector('#dotNumber' + numberIndex);
+	dotNumber.classList.add('dot_selected');
+	console.log("add est au numero" + dotNumber.id)
+}
+
+function removeDotSelectedRight() {
+	let numberIndexRemove = numberIndex -1;
+	let dotNumber = document.querySelector('#dotNumber' + numberIndexRemove);
+	dotNumber.classList.remove('dot_selected');
+	console.log('numberIndexRemove est au numero' + numberIndexRemove)
+}
+
+function removeDotSelectedLeft() {
+	let numberIndexRemove = numberIndex +1;
+	let dotNumber = document.querySelector('#dotNumber' + numberIndexRemove);
+	dotNumber.classList.remove('dot_selected');
+	console.log('numberIndexRemove est au numero' + numberIndexRemove)
+}
+
+// change the image and the paragraph
+function changeElement() {
+	bannerImage.src = "./assets/images/slideshow/" + slides[numberIndex].image;
+	bannerParagraph.innerHTML = slides[numberIndex].tagLine;
+}
 
 
-function arrowright() {
-		
-		arrowRight.addEventListener('click', () => {
-			
-			console.log('click arrow right');
-			numberIndex++;
-			bannerImage.src = "./assets/images/slideshow/" + slides[numberIndex].image;
-			bannerParagraph.innerHTML 	= slides[numberIndex].tagLine;
-				
-		})
+function slideLeft() {
+//   console.log("click arrow left");
+  numberIndex--;
+  changeElement()
+  removeDotSelectedLeft()
+  addDotSelectedLeft()
 
 }
-arrowright();
 
+function slideRight() {
+//   console.log("click arrow right");
+  numberIndex++;
+  changeElement();
+  removeDotSelectedRight()
+  addDotSelectedRight()
+}
