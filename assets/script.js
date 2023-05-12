@@ -5,8 +5,7 @@ const slides = [
   },
   {
     image: "slide2.jpg",
-    tagLine:
-      "Tirages haute définition grand format <span>pour vos bureaux et events</span>",
+    tagLine:"Tirages haute définition grand format <span>pour vos bureaux et events</span>",
   },
   {
     image: "slide3.jpg",
@@ -22,8 +21,7 @@ const slides = [
 const arrowLeft = document.querySelector(".arrow_left");
 const arrowRight = document.querySelector(".arrow_right");
 const bannerImage = document.querySelector(".banner-img");
-
-// dotNumber0.classList.add('dot_selected')
+const bannerParagraph = document.querySelector("#banner p");
 
 // change the index
 let numberIndex = 0;
@@ -31,7 +29,6 @@ let numberIndex = 0;
 // Get the class back
 bannerImage.src = "./assets/images/slideshow/" + slides[numberIndex].image;
 
-const bannerParagraph = document.querySelector("#banner p");
 bannerParagraph.innerHTML = slides[numberIndex].tagLine;
 
 // Creating dots
@@ -57,27 +54,23 @@ dotNumber.classList.add("dot_selected");
 function addDotSelectedRight() {
   let dotNumber = document.querySelector("#dotNumber" + numberIndex);
   dotNumber.classList.add("dot_selected");
-//   console.log("add est au numero" + dotNumber.id);
 }
 
 function addDotSelectedLeft() {
   let dotNumber = document.querySelector("#dotNumber" + numberIndex);
   dotNumber.classList.add("dot_selected");
-//   console.log("add est au numero" + dotNumber.id);
 }
 
 function removeDotSelectedRight() {
   let numberIndexRemove = numberIndex - 1;
   let dotNumber = document.querySelector("#dotNumber" + numberIndexRemove);
   dotNumber.classList.remove("dot_selected");
-//   console.log("numberIndexRemove est au numero" + numberIndexRemove);
 }
 
 function removeDotSelectedLeft() {
   let numberIndexRemove = numberIndex + 1;
   let dotNumber = document.querySelector("#dotNumber" + numberIndexRemove);
   dotNumber.classList.remove("dot_selected");
-//   console.log("numberIndexRemove est au numero" + numberIndexRemove);
 }
 
 // change the image and the paragraph
@@ -87,32 +80,36 @@ function changeElement() {
 }
 
 function slideLeft() {
-  //   console.log("click arrow left");
-  numberIndex--;
-  changeElement();
-  removeDotSelectedLeft();
-  addDotSelectedLeft();
+  if (numberIndex > 0) {
+    numberIndex--;
+    numberIndexRemove = numberIndex + 1;
+    changeElement();
+    removeDotSelectedLeft();
+    addDotSelectedLeft();
+    console.log("avant numberIndex = " + numberIndex);
+    console.log("avant numberIndexRemove = " + numberIndexRemove);
+  } else {
+    numberIndex = 3;
+    numberIndexRemove = 0;
+    changeElement(3);
+    addDotSelectedRight(3);
+    let dotNumber = document.querySelector("#dotNumber" + numberIndexRemove);
+    dotNumber.classList.remove("dot_selected");
+  }
 }
 
 function slideRight() {
-  //   console.log("click arrow right");
-
   if (numberIndex < 3) {
     numberIndex++;
     changeElement();
     removeDotSelectedRight();
     addDotSelectedRight();
   } else {
-	numberIndex = 0;
-	var numberIndexRemove = 3
+    numberIndex = 0;
+    numberIndexRemove = 3;
     changeElement(0);
     addDotSelectedRight(0);
-	
-    dotNumber = document.querySelector("dotNumber" + numberIndexRemove);
-	dotNumber.classList.remove("dot_selected");
-    // console.log("numberIndex revient à zéro !" + numberIndex);
-
-}
-
-  
+    let dotNumber = document.querySelector("#dotNumber" + numberIndexRemove);
+    dotNumber.classList.remove("dot_selected");
+  }
 }
