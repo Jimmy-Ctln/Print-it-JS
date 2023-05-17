@@ -32,9 +32,9 @@ bannerImage.src = "./assets/images/slideshow/" + slides[numberIndex].image;
 bannerParagraph.innerHTML = slides[numberIndex].tagLine;
 
 // Creating dots
-for (let i = 0; i < 4; i++) {
+for (let i = 0; i < slides.length; i++) {
   const dotElement = document.createElement("div");
-  var uniqueId = "dotNumber" + i;
+  let uniqueId = "dotNumber" + i;
   dotElement.id = uniqueId;
   dotElement.classList.add("dot");
 
@@ -86,29 +86,27 @@ function slideLeft() {
     changeElement();
     removeDotSelectedLeft();
     addDotSelectedLeft();
-    console.log("avant numberIndex = " + numberIndex);
-    console.log("avant numberIndexRemove = " + numberIndexRemove);
   } else {
-    numberIndex = 3;
+    numberIndex = slides.length -1;
     numberIndexRemove = 0;
-    changeElement(3);
-    addDotSelectedRight(3);
+    changeElement();
+    addDotSelectedRight();
     let dotNumber = document.querySelector("#dotNumber" + numberIndexRemove);
     dotNumber.classList.remove("dot_selected");
   }
 }
 
 function slideRight() {
-  if (numberIndex < 3) {
+  if (numberIndex < slides.length -1) {
     numberIndex++;
     changeElement();
     removeDotSelectedRight();
     addDotSelectedRight();
   } else {
     numberIndex = 0;
-    numberIndexRemove = 3;
-    changeElement(0);
-    addDotSelectedRight(0);
+    numberIndexRemove = slides.length -1;
+    changeElement();
+    addDotSelectedRight();
     let dotNumber = document.querySelector("#dotNumber" + numberIndexRemove);
     dotNumber.classList.remove("dot_selected");
   }
