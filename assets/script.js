@@ -51,12 +51,7 @@ arrowRight.addEventListener("click", slideRight);
 let dotNumber = document.querySelector("#dotNumber" + numberIndex);
 dotNumber.classList.add("dot_selected");
 
-function addDotSelectedRight() {
-  let dotNumber = document.querySelector("#dotNumber" + numberIndex);
-  dotNumber.classList.add("dot_selected");
-}
-
-function addDotSelectedLeft() {
+function addDotSelected() {
   let dotNumber = document.querySelector("#dotNumber" + numberIndex);
   dotNumber.classList.add("dot_selected");
 }
@@ -85,12 +80,12 @@ function slideLeft() {
     numberIndexRemove = numberIndex + 1;
     changeElement();
     removeDotSelectedLeft();
-    addDotSelectedLeft();
+    addDotSelected()
   } else {
     numberIndex = slides.length -1;
     numberIndexRemove = 0;
     changeElement();
-    addDotSelectedRight();
+    addDotSelected()
     let dotNumber = document.querySelector("#dotNumber" + numberIndexRemove);
     dotNumber.classList.remove("dot_selected");
   }
@@ -101,12 +96,12 @@ function slideRight() {
     numberIndex++;
     changeElement();
     removeDotSelectedRight();
-    addDotSelectedRight();
+    addDotSelected()
   } else {
     numberIndex = 0;
     numberIndexRemove = slides.length -1;
     changeElement();
-    addDotSelectedRight();
+    addDotSelected()
     let dotNumber = document.querySelector("#dotNumber" + numberIndexRemove);
     dotNumber.classList.remove("dot_selected");
   }
